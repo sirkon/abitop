@@ -38,9 +38,21 @@ func TestBitOp(t *testing.T) {
 	}
 
 	bitNo = 65
-	BitUnset(&data[bitNo>>6], bitNo&0x3f)
+	res := BitUnset(&data[bitNo>>6], bitNo&0x3f)
+	if !res {
+		t.Fatal("bit no 65 expected to be set before the call")
+	}
 	sample16 := []uint64{0, 0, 1}
 	if !reflect.DeepEqual(data, sample16) {
 		t.Fatalf("%v expected, got %v", sample16, data)
+	}
+
+	// check if bit no 65 is off setting it again
+	res = BitSet(&data[bitNo>>6], bitNo &0x3f)
+	if res {
+		t.Fatal("bit no 65 expected to be set off before the call")
+	}
+	if !reflect.DeepEqual(data, sample916) {
+		t.Fatalf("%v expected, got %v", sample916, data)
 	}
 }

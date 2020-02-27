@@ -1,7 +1,14 @@
 package bitop
 
-// BitSet sets given bit number bitno to 1 in given destination p
-func BitSet(p *uint64, bitno int)
+// BitSet включает бит с номером bitno в числе по адресу p
+func BitSet(p *uint64, bitno int) bool {
+	return bitSet(p, bitno) > 0
+}
 
-// BitUnset unsets bit number bitno to 0 in given destination p
-func BitUnset(p *uint64, bitno int)
+// BitUnset выключает бит с номером bitno в числе по адресу p
+func BitUnset(p *uint64, bitno int) bool {
+	return bitUnset(p, bitno) > 0
+}
+
+func bitSet(p *uint64, bitno int) uint64
+func bitUnset(p *uint64, bitno int) uint64
